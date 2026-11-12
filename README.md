@@ -8,4 +8,4 @@ The [profile](./data/profile.js), [project stories](./data/projects.js), and top
 
 ## Deploy with GitHub Pages
 
-The workflow in [`.github/workflows/pages.yml`](./.github/workflows/pages.yml) deploys the site automatically whenever code is pushed to `main`. It publishes only the page, its assets and data files, and this content guide. In the repository’s **Settings → Pages**, set the build and deployment source to **GitHub Actions**. The first workflow run can also be started manually from the **Actions** tab.
+The workflow in [`.github/workflows/pages.yml`](./.github/workflows/pages.yml) deploys the site automatically whenever code is pushed to `main`. It stages and publishes only the page, its assets, and data files. In the repository’s **Settings → Pages**, set the build and deployment source to **GitHub Actions**. The first workflow run can also be started manually from the **Actions** tab.

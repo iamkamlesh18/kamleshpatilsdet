@@ -28,14 +28,18 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
+      - name: Prepare site files
+        run: |
+          mkdir -p _site/assets _site/data
+          cp index.html _site/index.html
+          cp assets/app.js assets/styles.css _site/assets/
+          cp data/*.js _site/data/
+          touch _site/.nojekyll
+
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: |
-            index.html
-            assets/
-            data/
-            CONTENT_GUIDE.md
+          path: _site
 
       - name: Deploy site
         id: deployment

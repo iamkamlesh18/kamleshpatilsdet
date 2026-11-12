@@ -16,7 +16,7 @@ This is the human and AI reference for keeping the interview-prep site accurate.
 - [`data/questions-interviews.js`](./data/questions-interviews.js) contains common company interview and behavioural questions.
 - [`README.md`](./README.md) explains the project and deployment.
 
-The original interview-prep notes supplied with the project are kept separately as a reference. The Pages workflow does not publish those source notes.
+The original interview-prep notes supplied with the project are kept separately as a reference. The Pages workflow does not publish those source notes, this guide, or other repository-only files.
 
 ## Writing or updating content
 
@@ -34,4 +34,4 @@ The original interview-prep notes supplied with the project are kept separately 
 
 For a local preview, run `python3 -m http.server 8000` from the repository root and open `http://localhost:8000`. The JavaScript uses browser modules, so preview over HTTP rather than opening `index.html` directly.
 
-Push changes to `main` to run the GitHub Pages workflow. The repository's Pages source must be set to **GitHub Actions**. The workflow publishes `index.html`, `assets/`, `data/`, and this guide; source resume notes and repository-only files are not included in the site artifact.
+Push changes to `main` to run the GitHub Pages workflow. The repository's Pages source must be set to **GitHub Actions**. The workflow copies `index.html`, `assets/`, and `data/` into a clean `_site/` directory, then publishes that directory. Source resume notes, this guide, and other repository-only files are not included in the site artifact.
