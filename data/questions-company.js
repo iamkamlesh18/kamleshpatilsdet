@@ -332,5 +332,22 @@ export const companyQuestions = [
         answer: "A feature file contains readable Gherkin features and scenarios, usually saved with a .feature extension. It describes the expected behaviour using Given, When, and Then steps.\n\nA step definition is code that matches a Gherkin step and performs the required setup, action, or verification. Keeping the feature about behaviour and the step definition about implementation improves readability."
       }
     ]
+  },
+  {
+    topic: "AI in Quality Engineering",
+    questions: [
+      {
+        question: "How can AI help a QA or SDET, and how do you check its work?",
+        answer: "AI can assist with repetitive or first-draft work such as understanding a requirement, suggesting test ideas, drafting Gherkin, or helping explore project information. The tester still owns the test intent, risk assessment, data safety, and final decision.\n\nI check AI-generated work against the original requirement, the framework conventions, and expected behaviour. I review the code and data, run appropriate checks, and correct or reject output that is incomplete, incorrect, unsafe, or difficult to maintain. I describe a proof of concept as an evaluation unless it has actually been adopted and measured."
+      },
+      {
+        question: "How did you use GitHub Copilot in your COOP and Smile proof of concept?",
+        answer: "I first created the framework structure and decided how I wanted the automation to be organized. For a new requirement, I gave Copilot the requirement and a deliberate prompt, and asked it to work within that framework.\n\nThe proof of concept explored generating a Gherkin scenario, page-object code, and separate JSON test data using dummy data. I reviewed the generated files against the requirement and framework, then exercised the flow to check whether the output worked correctly.\n\nThis was a proof of concept to evaluate the approach. I do not present generated code as automatically correct or claim it was deployed to production."
+      },
+      {
+        question: "How did you use Atlassian Rovo with Jira?",
+        answer: "I used Rovo to help analyze project context and understand the work from project-owner, Scrum Master, and tester perspectives. I explored whether that assistance could reduce repetitive manual analysis and leave more time for important testing and team decisions.\n\nI treated Rovo's output as information to review, not as an authoritative project decision. The goal was to evaluate where it might help; I do not claim a measured reduction in effort."
+      }
+    ]
   }
 ];

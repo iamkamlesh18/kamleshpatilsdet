@@ -1,47 +1,58 @@
 # Content guide
 
-This is the human and AI reference for keeping the interview-prep site accurate. Read this file before changing the site.
+Read this guide before editing interview material. It records where facts live, how the browser assembles the study book, and which claims must remain carefully qualified.
 
-## What goes where
+## Site structure
 
-- [`index.html`](./index.html) is a small page shell. Keep personal details and interview answers out of it.
-- [`assets/styles.css`](./assets/styles.css) controls presentation only.
-- [`assets/app.js`](./assets/app.js) renders the page, tabs, search, recall mode, progress, and breathing timer.
-- [`data/profile.js`](./data/profile.js) contains the introduction, skills, certifications, education, and other personal facts.
-- [`data/projects.js`](./data/projects.js) contains the spoken project answers, tools, results, and the COOP deep dive.
-- [`data/questions-fundamentals-java.js`](./data/questions-fundamentals-java.js) contains testing fundamentals and Java.
-- [`data/questions-ui-bdd.js`](./data/questions-ui-bdd.js) contains Selenium, Serenity BDD, and Cucumber.
-- [`data/questions-api-sql.js`](./data/questions-api-sql.js) contains API testing and SQL.
-- [`data/questions-delivery.js`](./data/questions-delivery.js) contains TestNG, CI/CD, Git, Jira, and Agile.
-- [`data/questions-interviews.js`](./data/questions-interviews.js) contains common company interview and behavioural questions.
-- [`data/questions-company.js`](./data/questions-company.js) preserves the supplied Prama India, Infosys, Emerson, Selenium, TestNG, framework, BDD, domain, and behavioral question sets.
-- [`data/questions-java.js`](./data/questions-java.js) holds Java interview essentials shown in the dedicated Java tab.
-- [`data/questions-coding.js`](./data/questions-coding.js) holds the Java coding exercises and their recall plans and example solutions.
-- [`data/resources.js`](./data/resources.js) contains YouTube and Google Images search links for each learning chapter.
-- The grounding ritual and full affirmations are in a collapsed-by-default section in [`index.html`](./index.html); a short blessing remains visible in the header.
-- [`data/grounding.js`](./data/grounding.js) contains honest ownership and systems-thinking prompts for the speaking guide.
-- [`README.md`](./README.md) explains the project and deployment.
+- [`index.html`](./index.html) contains only the shared page shell and navigation.
+- [`assets/app.js`](./assets/app.js) renders the Intro, Projects, SDET & QA Q&A, and Grounding sections.
+- [`assets/styles.css`](./assets/styles.css) contains the responsive layout, chakra-inspired accent palette, and typography.
+- [`data/profile.js`](./data/profile.js) contains the candidate profile, introduction, skills, certifications, and education.
+- [`data/projects.js`](./data/projects.js) contains the four project stories; [`assets/app.js`](./assets/app.js) displays them as Union Bank, Elements, COOP and Smile Portal, then RSA Intact.
+- [`data/questions-fundamentals-java.js`](./data/questions-fundamentals-java.js) contains testing fundamentals and core Java.
+- [`data/questions-java.js`](./data/questions-java.js) contains additional Java interview questions. They appear in the Java topic inside the main Q&A book, not in a separate tab.
+- [`data/questions-coding.js`](./data/questions-coding.js) contains Java coding exercises. They appear under Java coding practice in the same Q&A book.
+- [`data/questions-ui-bdd.js`](./data/questions-ui-bdd.js) contains Selenium, Serenity BDD, and Cucumber questions.
+- [`data/questions-api-sql.js`](./data/questions-api-sql.js) contains REST/API testing and SQL questions.
+- [`data/questions-delivery.js`](./data/questions-delivery.js) contains TestNG, CI/CD, Git, Jira, and Agile questions.
+- [`data/questions-interviews.js`](./data/questions-interviews.js) contains SDET scenarios and behavioural questions.
+- [`data/questions-company.js`](./data/questions-company.js) preserves supplied company questions and the AI-in-Quality-Engineering answers.
+- [`data/resources.js`](./data/resources.js) contains optional YouTube and Google Images searches for topics.
+- [`data/grounding.js`](./data/grounding.js) contains the honest ownership and systems-thinking prompts used in the Intro.
 
-The original interview-prep notes supplied with the project are kept separately as a reference. The Pages workflow does not publish those source notes, this guide, or other repository-only files.
+The Grounding tab keeps affirmations, faith, and breathing separate from interview study content. Its breathing panel is closed until opened and its timer stops if the user leaves the tab or closes the panel.
 
-## Writing or updating content
+## Editing interview answers
 
-1. Keep the candidate's voice natural, first-person, and easy to say aloud. Write complete answers rather than fragments.
-2. Keep every question answer point-first. The page shows concise recall bullets first and places the full spoken explanation inside a separate expandable subsection.
-3. Keep the key idea first, then add an example, practical use, or caveat. Use paragraph breaks (`\n\n`) to make those parts easier to scan.
-4. Use only facts Kamlesh has supplied. Do not invent employers, responsibilities, tools, certifications, team sizes, or results.
-5. Preserve verified project results: COOP improved test-cycle efficiency by 40%; Elements reduced manual effort by 60%. Do not change the meaning of either figure.
-6. Keep each project's recall points, spoken answer, tools, and result separate. COOP has extra framework, CI/CD, reuse, data-validation, and troubleshooting depth.
-7. Put each question under its existing topic. Each question file exports an array of topic objects; every topic has a name and a list of `{ question, answer }` records. Optional `recall` arrays can override the automatic first-sentence recall cues.
-8. Add or update topic learning searches in `data/resources.js`. These open Google Images or YouTube search results, not embedded third-party media; the book's diagrams are original inline SVG.
-9. Leave the short comments at the top of data files in place. They explain the file's purpose to future editors and AI tools.
-10. If an answer depends on current personal details, such as notice period or years of experience, confirm it with Kamlesh before changing it.
-11. Keep imports in `assets/app.js` in sync when adding a new data file, and keep the GitHub Pages upload paths in `.github/workflows/pages.yml` in sync if adding site assets.
-12. Keep the static opening ritual in `index.html` available without JavaScript but collapsed by default. Keep confidence guidance encouraging and grounded: affirm preparation and honest communication, not guaranteed interview outcomes. Make it clear that leadership-style system thinking does not mean claiming work or authority the candidate did not have.
-13. Keep Java and coding as separate top-level routes. Keep all general topic shortcuts visible in the Q&A topic bar while a topic is open; do not make users return to the chapter index just to change subjects.
+1. Keep one answer per question. Write it in clear paragraphs in the `answer` field; the page renders each paragraph as a bullet in a single answer block.
+2. Do not add a separate recall answer beside a second “spoken answer.” Put the useful explanation, example, and caveat into the one answer.
+3. Keep the question under the most specific topic. The browser combines Java files under Java, coding exercises under Java coding practice, and repeated topic names into one chapter.
+4. Keep every question in the main Q&A book. The “Most asked” filter is a shortcut, not a second question bank. Add or adjust its patterns in `assets/app.js` only when supplied material genuinely repeats or emphasizes a question.
+5. Add Java code using the question's optional `code` field. Keep explanation in `answer`; the code is a supporting example, not another answer.
+6. Preserve the user's supplied company questions. Do not remove material just to shorten the book; improve organization and wording instead.
+7. Keep answers accurate and sayable aloud. Use terms and examples that explain what a concept is for, when it applies, and important trade-offs.
+8. Use only facts Kamlesh has supplied. Do not invent responsibilities, tools, certifications, team sizes, or results.
 
-## Preview and publish
+## Project facts and AI proof of concept
 
-For a local preview, run `python3 -m http.server 8000` from the repository root and open `http://localhost:8000`. The JavaScript uses browser modules, so preview over HTTP rather than opening `index.html` directly.
+- Keep the displayed project order: Union Bank, Elements, COOP and Smile Portal, RSA Intact.
+- Preserve verified results: COOP improved test-cycle efficiency by 40%; Elements reduced manual effort by 60%.
+- Describe Kamlesh's work as testing and automation work. Do not imply ownership of all team decisions.
+- COOP/Smile AI work was a proof of concept: Kamlesh designed the framework shape, supplied requirements and prompts to GitHub Copilot, explored Gherkin, page-object code, and separate JSON dummy data, then reviewed and exercised the output for correctness.
+- Do not describe the Copilot proof of concept as a production deployment or claim a measured productivity gain.
+- Rovo was used to help understand project context and explore project-owner, Scrum Master, and tester perspectives. Do not claim a quantified time saving or that Rovo made project decisions.
+- Keep any future outcomes clearly distinguished between measured results, qualitative observations, and experiments.
 
-Push changes to `main` to run the GitHub Pages workflow. The repository's Pages source must be set to **GitHub Actions**. The workflow copies `index.html`, `assets/`, and `data/` into a clean `_site/` directory, then publishes that directory. Source resume notes, this guide, and other repository-only files are not included in the site artifact.
+## Accuracy and maintenance
+
+- Preserve facts in `data/profile.js` and verify current values before updating time-sensitive details.
+- Keep the COOP framework, CI/CD, reusable-component, validation, and AI POC details in its deep dive.
+- Learning links are external searches, not endorsements or fixed video recommendations; preserve that distinction.
+- Keep data-file comments, imports, and this guide aligned when adding content.
+- The Pages workflow publishes only `index.html`, `assets/`, and `data/`. The source notes, this guide, and other repository-only files are not included.
+
+## Preview and deployment
+
+Run `python3 -m http.server 8000` from the repository root and open `http://localhost:8000`; the site uses browser ES modules and should not be opened with `file://`.
+
+Pushing to `main` runs [`.github/workflows/pages.yml`](./.github/workflows/pages.yml). GitHub Pages must use **Settings → Pages → Build and deployment → GitHub Actions** as its source.

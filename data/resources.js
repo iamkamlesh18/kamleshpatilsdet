@@ -6,6 +6,11 @@ export const learningResources = {
     youtube: "software testing fundamentals smoke sanity regression test design",
     images: "software testing life cycle test pyramid equivalence partitioning"
   },
+  "Defect management": {
+    description: "Defect reports, lifecycle, severity, and priority",
+    youtube: "software defect life cycle severity priority testing",
+    images: "defect lifecycle severity priority diagram"
+  },
   Java: {
     description: "Core Java, collections, and object-oriented design",
     youtube: "Java OOP explained visually animations collections interview",
@@ -25,6 +30,11 @@ export const learningResources = {
     description: "Framework design, data, reporting, TestNG, and tools",
     youtube: "TestNG Serenity framework automation testing explained visual",
     images: "automation testing framework architecture diagram doodle"
+  },
+  "Automation and framework": {
+    description: "Framework design, test data, and maintainable automation",
+    youtube: "test automation framework design data driven testing Java",
+    images: "test automation framework architecture diagram Java"
   },
   "Editor and chat application automation": {
     description: "Test strategy for text editors, rich text, and chat",
@@ -49,6 +59,11 @@ export const learningResources = {
   "Payments and financial domain — company questions": {
     description: "A high-level view of bank transfers and payment flows",
     youtube: "how interbank payments work clearing settlement explained animation",
+    images: "interbank payment flow clearing settlement diagram"
+  },
+  "Payments and financial domain": {
+    description: "Payment flows, bank communication, and QA responsibilities",
+    youtube: "interbank payments clearing settlement explained",
     images: "interbank payment flow clearing settlement diagram"
   },
   "General and behavioral — company questions": {
@@ -125,6 +140,21 @@ export const learningResources = {
     description: "Practical SDET scenarios and quality decisions",
     youtube: "SDET interview scenarios automation strategy flaky tests",
     images: "test automation strategy risk based testing diagram"
+  },
+  "SDET scenarios": {
+    description: "Practical testing strategy and quality decisions",
+    youtube: "SDET interview scenarios test strategy risk based testing",
+    images: "risk based testing strategy diagram"
+  },
+  "IVR and domain concepts": {
+    description: "IVR call flows and other domain concepts",
+    youtube: "IVR interactive voice response explained call flow",
+    images: "IVR call flow diagram"
+  },
+  "AI in Quality Engineering": {
+    description: "Responsible use of AI for test design and automation",
+    youtube: "AI assisted software testing human review test automation",
+    images: "AI software testing human in the loop workflow diagram"
   },
   "Behavioural and HR": {
     description: "Clear, evidence-based stories about your work",

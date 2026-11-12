@@ -3,92 +3,32 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="theme-color" content="#f7f4ed">
+    <meta name="theme-color" content="#f6f5fb">
     <meta name="description" content="Interview preparation for Kamlesh Patil, QA Engineer and SDET.">
     <title>Kamlesh Patil — Interview Prep</title>
-    <link rel="stylesheet" href="assets/styles.css?v=interview-book-3">
-    <script type="module" src="assets/app.js?v=interview-book-3"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css?v=learning-book-4">
+    <script type="module" src="assets/app.js?v=learning-book-4"></script>
   </head>
   <body>
     <header class="hero">
       <div class="hero-copy">
         <div class="eyebrow">My interview field guide <span>·</span> QA Engineer <span>·</span> SDET</div>
         <h1>Kamlesh Patil</h1>
-        <p class="hero-intro">Understand the work. Remember the story. Speak with confidence.</p>
-        <p class="hero-affirmation"><span aria-hidden="true">✦</span> I am blessed, prepared, and able to explain my work with calm and clarity.</p>
+        <p class="hero-intro">A practical learning book for QA and SDET interviews.</p>
       </div>
       <div class="toolbar" aria-label="Interview preparation tools">
         <button id="recall-toggle" type="button" aria-pressed="false">Recall practice</button>
-        <button id="breath-toggle" type="button" aria-expanded="false">Take a breathing pause</button>
         <button id="theme-toggle" type="button" aria-label="Change colour theme">◐</button>
       </div>
-      <section id="breathing" class="breathing" aria-live="polite" hidden>
-        <div class="breathing-orb" aria-hidden="true"></div>
-        <p id="breathing-instruction">Ready when you are.</p>
-      </section>
     </header>
-
-    <details class="confidence-card">
-      <summary class="confidence-summary">
-        <span class="confidence-kicker">Before you begin <span aria-hidden="true">✦</span> Manifestation · affirmations · faith</span>
-        <span class="confidence-preview">I am blessed, prepared, and able to explain my work with calm and clarity.</span>
-        <span class="confidence-open-hint">Open your grounding ritual <span aria-hidden="true">＋</span></span>
-      </summary>
-      <div class="confidence-content">
-        <div class="confidence-topline">
-          <span class="confidence-kicker">One quiet minute for yourself</span>
-          <span class="confidence-index">01 — 03</span>
-        </div>
-        <div class="confidence-heading">
-          <div>
-            <p class="eyebrow">Intention · visualization · action</p>
-            <h2 id="confidence-title">First, arrive as yourself.</h2>
-            <p class="confidence-lead">Picture how you want to show up. Let that picture guide one real step: breathe, choose a topic, and practise aloud.</p>
-          </div>
-          <svg class="confidence-mark" viewBox="0 0 120 120" role="img" aria-labelledby="confidence-mark-title">
-            <title id="confidence-mark-title">A rising sun as a reminder to pause and find perspective</title>
-            <circle cx="60" cy="60" r="48" fill="none" stroke="currentColor" stroke-width="1"/>
-            <circle cx="60" cy="60" r="35" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 5"/>
-            <path d="M25 67h70M37 67a23 23 0 0 1 46 0M60 22v10m-29 1 7 7m51-7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="m47 75 13-9 13 9-13 12z" fill="currentColor" opacity=".18"/>
-            <path d="m47 75 13-9 13 9-13 12z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="confidence-practice">
-          <section><h3>Manifestation · picture the moment</h3><p>I see myself listening carefully, taking a breath, and explaining what I know with calm and clarity. I pair that picture with one real practice step.</p></section>
-          <section><h3>Affirmation · say it aloud</h3><blockquote>“I am prepared to explain my work. I can pause, think, and speak honestly. I own my contribution, and I keep learning.”</blockquote></section>
-          <section><h3>Faith · remember what grounds me</h3><p>I am blessed and a child of God. My faith gives me strength, humility, and courage.</p></section>
-        </div>
-        <section class="affirmation-list" aria-labelledby="affirmation-list-title">
-          <h3 id="affirmation-list-title">My affirmations · read slowly, choose one to carry with you</h3>
-          <ul>
-            <li>I am prepared to explain the work I have done.</li>
-            <li>I can speak clearly, pause, and think before I answer.</li>
-            <li>I own my contribution, and I respect the work my team did together.</li>
-            <li>I can be frank about what I know, what I did, and what I am still learning.</li>
-            <li>I am blessed and a child of God; my faith can give me strength, humility, and courage.</li>
-            <li>My ancestors' blessings are with me. I remember their love, lessons, and strength.</li>
-            <li>My Kuldevi's blessings guide and protect me; I carry gratitude, humility, and courage.</li>
-            <li>I bow in gratitude to every force and deity I hold sacred, with awareness and a clear conscience.</li>
-            <li>My awareness is steady. I can observe, understand, and choose my next step.</li>
-            <li>My memory is strong. I understand what I study, organize it clearly, and recall it through focused practice.</li>
-            <li>I am able to understand and remember what I learn in the right way, one idea at a time.</li>
-            <li>Technology is a tool. I can rise above details and see the whole system, like Garuda or Hansa from a high vantage point.</li>
-            <li>I trust that what is meant for me can meet my sincere effort; I make the best of what is here today.</li>
-          </ul>
-        </section>
-        <div class="confidence-actions">
-          <button type="button" class="button-primary" data-start-study>I'm ready — start the book <span aria-hidden="true">↓</span></button>
-          <button type="button" data-start-breathing>Guide me through the breaths</button>
-          <span>Faith grounds me; understanding and practice strengthen my recall.</span>
-        </div>
-      </div>
-    </details>
 
     <nav id="tabs" class="tabs" aria-label="Interview preparation sections"></nav>
     <main id="content" tabindex="-1"></main>
     <footer>
-      <p>These are speaking notes, not a script to memorize. Use the details you can explain confidently and add your own examples in the data files.</p>
+      <p>Study the ideas, practise the examples, and use your own experience when you answer.</p>
     </footer>
   </body>
 </html>

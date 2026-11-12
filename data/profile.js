@@ -17,8 +17,8 @@ export const profile = {
     { title: "How I keep growing", detail: "Azure · Salesforce · Agile · banking · Capgemini Ocean learning" }
   ],
   intro: [
-    "Hello, my name is Kamlesh Patil. I am a Software Engineer with 5 years of experience in Quality Engineering, software testing, automation testing, and mobile testing.",
-    "Over the years, I have worked on enterprise-level projects across banking and financial services. I have also supported insurance and fleet-management work.",
+    "Hello, my name is Kamlesh Patil. I am a Software Engineer working in quality engineering as a QA Engineer and SDET at Capgemini. Since September 2021, I have built five years of experience in software testing, automation testing, and mobile testing.",
+    "I have tested enterprise projects across banking and financial services, and also supported insurance and fleet-management work.",
     "My primary expertise includes Java, Selenium, manual and mobile testing, Serenity BDD, Cucumber, BrowserStack, API testing, and Agile Scrum. My day-to-day responsibilities include functional testing, test design, automation framework development, regression-suite maintenance, environment validation, defect management, sprint testing, and production validation.",
     "I keep learning emerging technologies and have completed Azure, Salesforce, Agile, banking, and Capgemini Ocean training and certifications."
   ],
