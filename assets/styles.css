@@ -298,8 +298,18 @@ main { min-height: 45vh; }
 .question-chapter > h2 { margin: 22px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--line); font-size: 1.55rem; }
 .question-answer { max-width: 82ch; margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--line); }
 .answer-points { margin: 0; padding-left: 1.3rem; }
-.answer-points li { padding: 6px 0 6px 5px; }
+.answer-points li { padding: 8px 0 8px 5px; }
 .answer-points li::marker { color: var(--green); }
+.answer-points li + li { border-top: 1px solid color-mix(in srgb, var(--line) 72%, transparent); }
+.answer-points strong { color: var(--accent-deep); }
+.answer-points code { padding: 1px 5px; border-radius: 4px; background: var(--accent-wash); font: .9em "SFMono-Regular", Consolas, monospace; }
+.comparison-wrap { max-width: 100%; margin: 16px 0; overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+.comparison-table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: .9rem; }
+.comparison-table th, .comparison-table td { min-width: 130px; padding: 11px 13px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.comparison-table thead th { background: var(--accent-wash); color: var(--accent-deep); font-weight: 750; }
+.comparison-table tbody th { color: var(--green); font-weight: 700; }
+.comparison-table tbody tr:last-child > * { border-bottom: 0; }
+.comparison-wrap:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
 .code-fold { margin-top: 12px; }
 .code-fold > summary { cursor: pointer; color: var(--accent-deep); font-family: var(--font-body); font-size: .85rem; font-weight: 700; }
 pre {
@@ -366,8 +376,11 @@ pre {
 .grounding-card:nth-of-type(2) { border-left-color: var(--chakra-solar); }
 .grounding-card:nth-of-type(3) { border-left-color: var(--chakra-heart); }
 .grounding-card:nth-of-type(4) { border-left-color: var(--chakra-brow); }
+.grounding-card.manifestation-card { border-left-color: var(--chakra-crown); background: linear-gradient(145deg, var(--surface), var(--accent-wash)); }
 .grounding-card h3 { margin: 0 0 8px; font-family: var(--font-display); font-size: 1.35rem; }
 .grounding-card > p:last-child { max-width: 75ch; margin-bottom: 0; }
+.manifestation-card > p:not(.grounding-label) { max-width: 75ch; }
+.manifestation-close { padding-top: 12px; border-top: 1px solid var(--line); color: var(--accent-deep); font-weight: 650; }
 .grounding-label { margin-bottom: 6px; color: var(--accent-deep); font-size: .72rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
 .grounding-list { display: grid; gap: 8px; margin: 0; padding-left: 1.2rem; }
 .grounding-list li { padding-left: 4px; }
@@ -379,12 +392,17 @@ pre {
 .meditation-panel .breathing { margin: 16px 0 0; }
 .breathing { grid-column: auto; }
 
-footer { margin-top: 38px; padding: 19px 0 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .84rem; }
+.site-footer { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 20px; margin-top: 48px; padding: 22px 0 8px; border-top: 1px solid var(--line); color: var(--muted); font-size: .84rem; }
+.site-footer p { max-width: 75ch; margin: 0; }
+.site-footer strong { color: var(--ink); }
+.site-footer a { flex: none; font-weight: 700; text-decoration-thickness: 1px; }
 
 @media (max-width: 760px) {
   body { padding-right: 18px; padding-left: 18px; }
   .hero { grid-template-columns: 1fr; align-items: start; padding-top: 28px; }
   .toolbar { justify-content: flex-start; }
+  .tabs { flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: thin; }
+  .tabs button { flex: 0 0 auto; white-space: nowrap; }
   .topic-nav { flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: thin; }
   .topic-chip { flex: 0 0 auto; }
 }
@@ -395,7 +413,7 @@ footer { margin-top: 38px; padding: 19px 0 0; border-top: 1px solid var(--line);
   .toolbar { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
   #theme-toggle { grid-column: 2; grid-row: 1; justify-self: end; }
   .tabs { top: 4px; margin: 17px 0 22px; }
-  .tabs button { flex: 1; padding: 8px 6px; font-size: .79rem; }
+  .tabs button { padding: 8px 10px; font-size: .79rem; }
   .progress { grid-template-columns: 1fr; gap: 4px; }
   .learning-links > div { flex-basis: 100%; }
   .ownership-steps li { grid-template-columns: 28px 1fr; gap: 3px 8px; }

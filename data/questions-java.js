@@ -13,7 +13,30 @@ export const javaInterviewQuestions = [
       },
       {
         question: "What is the difference between overloading and overriding?",
-        answer: "Overloading uses the same method name with different parameter lists, usually in the same class. The compiler selects which overload to call from the arguments, so it is compile-time polymorphism.\n\nOverriding replaces an inherited instance method with a compatible implementation in a subclass. The runtime object determines which implementation runs, so it is runtime polymorphism."
+        answer: [
+          "**Overloading:** Same method name, different parameter list (number, types, or order). The compiler chooses the matching method from the arguments, so this is compile-time polymorphism.",
+          "**Overriding:** A subclass provides a compatible implementation of an inherited instance method. The actual object determines which implementation runs, so this is runtime polymorphism.",
+          "**COOP / Smile connection:** Both concepts can help explain Java automation design, but my project evidence is Java, Serenity BDD, Selenium, reusable components, and a reviewed page-object proof of concept. I do not claim a particular project class used inheritance unless I can verify that code."
+        ],
+        comparison: {
+          headers: ["Compare", "Overloading", "Overriding"],
+          rows: [
+            ["Parameters", "Must differ", "Must match the inherited method"],
+            ["Relationship", "Usually within one class", "Requires an inherited instance method"],
+            ["Binding", "Compile time", "Runtime"],
+            ["Interview cue", "Same name, different inputs", "Same contract, specialized implementation"]
+          ]
+        },
+        code: `// Illustrative login-check example, not project source.
+class LoginCheck {
+    void login(String username) { }
+    void login(String username, String otp) { }
+}
+
+class SecureLoginCheck extends LoginCheck {
+    @Override
+    void login(String username) { }
+}`
       },
       {
         question: "What is the difference between == and equals() in Java?",

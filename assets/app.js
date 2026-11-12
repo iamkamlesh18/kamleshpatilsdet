@@ -94,6 +94,10 @@ function normalizeQuestion(question) {
   return question.toLocaleLowerCase().replace(/[^a-z0-9]+/gu, " ").trim();
 }
 
+function answerLength(answer) {
+  return (Array.isArray(answer) ? answer.join("\n") : answer).length;
+}
+
 const questionGroupsByTopic = new Map();
 const questionOccurrences = new Map();
 for (const group of sourceQuestionGroups) {
@@ -105,8 +109,9 @@ for (const group of sourceQuestionGroups) {
     questionOccurrences.set(key, (questionOccurrences.get(key) || 0) + 1);
     const existing = questions.find(item => normalizeQuestion(item.question) === normalizeQuestion(question.question));
     if (existing) {
-      existing.answer = question.answer.length > existing.answer.length ? question.answer : existing.answer;
+      existing.answer = answerLength(question.answer) > answerLength(existing.answer) ? question.answer : existing.answer;
       existing.code ||= question.code;
+      existing.comparison ||= question.comparison;
       continue;
     }
     questions.push({ ...question, topic });
@@ -137,7 +142,8 @@ const tabNames = [
   ["intro", "Intro"],
   ["projects", "Projects"],
   ["questions", "SDET & QA Q&A"],
-  ["grounding", "Grounding"]
+  ["grounding", "Grounding"],
+  ["meditation", "Breathing meditation · 3 deep breaths, then 1 minute"]
 ];
 let activeTopic = null;
 let mostAskedOnly = true;
@@ -194,9 +200,37 @@ function renderChips(items) {
   return `<ul class="chips">${items.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
 }
 
+function formatAnswerPoint(point) {
+  const escaped = escapeHtml(point.trim());
+  return escaped
+    .replace(/`([^`]+)`/gu, "<code>$1</code>")
+    .replace(/\*\*(.+?)\*\*/gu, "<strong>$1</strong>");
+}
+
 function renderAnswerPoints(answer) {
-  const points = Array.isArray(answer) ? answer : answer.split(/\n\s*\n/u);
-  return `<ul class="answer-points">${points.filter(Boolean).map(point => `<li>${escapeHtml(point)}</li>`).join("")}</ul>`;
+  const paragraphs = Array.isArray(answer) ? answer : answer.split(/\n\s*\n/u);
+  const points = paragraphs.flatMap(paragraph => paragraph
+    .replace(/\b(e\.g|i\.e)\./giu, "$1\uE000")
+    .split(/(?<=[.!?])\s+(?=[\p{Lu}"“])/u)
+    .map(point => point.replaceAll("\uE000", ".").trim())
+    .filter(Boolean));
+  return `<ul class="answer-points">${points.map(point => `<li>${formatAnswerPoint(point)}</li>`).join("")}</ul>`;
+}
+
+function renderComparisonTable(comparison, question) {
+  const headers = comparison.headers.map(header => `<th scope="col">${escapeHtml(header)}</th>`).join("");
+  const rows = comparison.rows.map(row => `
+    <tr>${row.map((cell, index) => index === 0
+      ? `<th scope="row">${escapeHtml(cell)}</th>`
+      : `<td>${escapeHtml(cell)}</td>`).join("")}</tr>
+  `).join("");
+  return `
+    <div class="comparison-wrap" role="region" aria-label="${escapeHtml(question)} comparison" tabindex="0">
+      <table class="comparison-table">
+        <thead><tr>${headers}</tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
 }
 
 function renderCoopDiagram() {
@@ -381,6 +415,7 @@ function renderQuestion(question) {
           ${question.mostAsked ? '<span class="question-star" aria-label="Frequently asked">★</span>' : ""}
         </summary>
         <div class="question-answer answer-content">${renderAnswerPoints(question.answer)}</div>
+        ${question.comparison ? renderComparisonTable(question.comparison, question.question) : ""}
         ${question.code ? `
           <details class="code-fold">
             <summary>View Java example</summary>
@@ -492,11 +527,6 @@ function renderGrounding() {
       <h2>Grounding</h2>
     </header>
     <section class="grounding-card">
-      <p class="grounding-label">Manifestation · intention</p>
-      <h3>I arrive prepared, calm, and ready to learn.</h3>
-      <p>I picture myself listening carefully, taking a breath, and explaining what I know with clarity. I pair that intention with the real work of preparation and practice.</p>
-    </section>
-    <section class="grounding-card">
       <p class="grounding-label">Faith and gratitude</p>
       <ul class="grounding-list">
         <li>I am blessed and a child of God; my faith gives me strength, humility, and courage.</li>
@@ -514,6 +544,13 @@ function renderGrounding() {
         <li>I can understand and remember what I learn, one idea at a time.</li>
         <li>I can rise above technical detail and see the whole system, like Garuda or Hansa from a high vantage point.</li>
       </ul>
+    </section>
+    <section class="grounding-card manifestation-card">
+      <p class="grounding-label">Manifestation · feel the moment, here and now</p>
+      <h3>I am here. I am prepared. I speak with calm ownership.</h3>
+      <p>Let your feet rest on the floor. Feel the chair support you and let your shoulders soften. Take one easy breath. Picture the interview room as if you are there now: you hear the question, pause without rushing, and feel your mind settle on the part you know.</p>
+      <p>See yourself explaining one real example from Union Bank, Elements, COOP and Smile Portal, or RSA Intact. You describe your own testing work, name the tools you used, and explain the result honestly. Notice the steadiness in your voice and the relief of being understood. You do not need to predict an outcome; you are practising the clear, capable actions you can take in this moment.</p>
+      <p class="manifestation-close">Feel that confidence for a breath. When you are ready, open your eyes and carry that steadiness into your next practice answer.</p>
     </section>
     <details class="meditation-panel">
       <summary>Breathing meditation · 3 deep breaths, then 1 minute</summary>
@@ -539,10 +576,11 @@ function render() {
     ? renderProjects()
     : activeTab === "questions"
       ? renderQuestions()
-      : activeTab === "grounding"
+      : activeTab === "grounding" || activeTab === "meditation"
         ? renderGrounding()
         : renderIntro();
 
+  if (activeTab === "meditation") content.querySelector(".meditation-panel").open = true;
   if (activeTab === "questions") renderQuestionList("");
 }
 

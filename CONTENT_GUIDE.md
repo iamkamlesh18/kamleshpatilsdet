@@ -20,18 +20,19 @@ Read this guide before editing interview material. It records where facts live, 
 - [`data/resources.js`](./data/resources.js) contains optional YouTube and Google Images searches for topics.
 - [`data/grounding.js`](./data/grounding.js) contains the honest ownership and systems-thinking prompts used in the Intro.
 
-The Grounding tab keeps affirmations, faith, and breathing separate from interview study content. Its breathing panel is closed until opened and its timer stops if the user leaves the tab or closes the panel.
+The Grounding tab keeps affirmations, a present-tense manifestation exercise, faith, and breathing separate from interview study content. The top navigation includes a breathing shortcut beside Grounding; it opens the meditation panel directly. Returning to Grounding leaves the panel closed, and its timer stops if the user changes sections or closes the panel.
 
 ## Editing interview answers
 
-1. Keep one answer per question. Write it in clear paragraphs in the `answer` field; the page renders each paragraph as a bullet in a single answer block.
+1. Keep one answer per question. Write clear sentences in the `answer` field, as a string or an array of points; the page displays the sentences as spaced bullets in a single answer block.
 2. Do not add a separate recall answer beside a second “spoken answer.” Put the useful explanation, example, and caveat into the one answer.
 3. Keep the question under the most specific topic. The browser combines Java files under Java, coding exercises under Java coding practice, and repeated topic names into one chapter.
 4. Keep every question in the main Q&A book. The “Most asked” filter is a shortcut, not a second question bank. Add or adjust its patterns in `assets/app.js` only when supplied material genuinely repeats or emphasizes a question.
-5. Add Java code using the question's optional `code` field. Keep explanation in `answer`; the code is a supporting example, not another answer.
-6. Preserve the user's supplied company questions. Do not remove material just to shorten the book; improve organization and wording instead.
-7. Keep answers accurate and sayable aloud. Use terms and examples that explain what a concept is for, when it applies, and important trade-offs.
-8. Use only facts Kamlesh has supplied. Do not invent responsibilities, tools, certifications, team sizes, or results.
+5. Add Java code using the question's optional `code` field. Keep explanation in `answer`; the code is a supporting example, not another answer. Wrap key terms in `**double asterisks**` for bold emphasis; wrap inline keywords in backticks.
+6. For a useful side-by-side distinction, add a `comparison` object with `headers` and `rows`; the page renders it as a scrollable accessible table below the answer.
+7. Preserve the user's supplied company questions. Do not remove material just to shorten the book; improve organization and wording instead.
+8. Keep answers accurate and sayable aloud. Use terms and examples that explain what a concept is for, when it applies, and important trade-offs. Use only confirmed project experience for first-person examples; label illustrative code as illustrative rather than implying it came from a project.
+9. Use only facts Kamlesh has supplied. Do not invent responsibilities, tools, certifications, team sizes, or results.
 
 ## Project facts and AI proof of concept
 
