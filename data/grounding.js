@@ -1,19 +1,5 @@
-// A confidence ritual before study. Affirmations support focus; follow them with specific actions.
+// Ownership and systems-thinking prompts used in the expandable speaking guide.
 export const grounding = {
-  intention: "I am here to prepare, understand, and communicate—not to perform a perfect script.",
-  steps: [
-    { title: "Settle", detail: "Take three comfortable deep breaths. Use the Calm breathing button if you want guided pacing." },
-    { title: "Picture the moment", detail: "See yourself listening to a question, pausing, choosing a clear structure, and answering honestly." },
-    { title: "Choose an action", detail: "Pick one chapter or one project story to practise aloud today. Confidence grows through preparation and repetition." }
-  ],
-  affirmations: [
-    "I am prepared to explain the work I have done.",
-    "I can speak clearly, pause, and think before I answer.",
-    "I own my contribution, and I respect the work my team did together.",
-    "I can be frank about what I know, what I did, and what I am still learning.",
-    "I am blessed and a child of God; my faith can give me strength, humility, and courage.",
-    "Technology is a tool. I can rise above the details and see the whole system, like Garuda or Hansa from a high vantage point."
-  ],
   ownershipSteps: [
     { title: "Purpose", detail: "What user or business need does the system serve?" },
     { title: "Journey", detail: "How does a request travel from the user through the system?" },

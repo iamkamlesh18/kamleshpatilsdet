@@ -15,7 +15,8 @@ This is the human and AI reference for keeping the interview-prep site accurate.
 - [`data/questions-delivery.js`](./data/questions-delivery.js) contains TestNG, CI/CD, Git, Jira, and Agile.
 - [`data/questions-interviews.js`](./data/questions-interviews.js) contains common company interview and behavioural questions.
 - [`data/resources.js`](./data/resources.js) contains YouTube and Google Images search links for each learning chapter.
-- [`data/grounding.js`](./data/grounding.js) contains the pre-study intention, faith-based affirmations, visualization steps, and honest ownership/systems-thinking prompts.
+- The always-visible manifestation and affirmation ritual is plain HTML in [`index.html`](./index.html), so it remains visible even before JavaScript loads.
+- [`data/grounding.js`](./data/grounding.js) contains honest ownership and systems-thinking prompts for the speaking guide.
 - [`README.md`](./README.md) explains the project and deployment.
 
 The original interview-prep notes supplied with the project are kept separately as a reference. The Pages workflow does not publish those source notes, this guide, or other repository-only files.
@@ -33,7 +34,7 @@ The original interview-prep notes supplied with the project are kept separately 
 9. Leave the short comments at the top of data files in place. They explain the file's purpose to future editors and AI tools.
 10. If an answer depends on current personal details, such as notice period or years of experience, confirm it with Kamlesh before changing it.
 11. Keep imports in `assets/app.js` in sync when adding a new data file, and keep the GitHub Pages upload paths in `.github/workflows/pages.yml` in sync if adding site assets.
-12. Keep confidence guidance encouraging and grounded: affirm preparation and honest communication, not guaranteed interview outcomes. Make it clear that leadership-style system thinking does not mean claiming work or authority the candidate did not have.
+12. Keep the static opening ritual in `index.html` visible without JavaScript. Keep confidence guidance encouraging and grounded: affirm preparation and honest communication, not guaranteed interview outcomes. Make it clear that leadership-style system thinking does not mean claiming work or authority the candidate did not have.
 
 ## Preview and publish
 

@@ -165,28 +165,6 @@ function renderSystemViewDiagram() {
   </figure>`;
 }
 
-function renderGrounding() {
-  return `
-    <section class="book-card grounding-card" aria-labelledby="grounding-title">
-      <p class="section-label">Before you begin · 1 minute</p>
-      <h2 id="grounding-title">Arrive with calm. Leave with a clear intention.</h2>
-      <p class="grounding-intention">${escapeHtml(grounding.intention)}</p>
-      <ol class="grounding-steps">
-        ${grounding.steps.map(step => `<li><strong>${escapeHtml(step.title)}</strong><span>${escapeHtml(step.detail)}</span></li>`).join("")}
-      </ol>
-      <h3 class="subheading">Say what you need to hear</h3>
-      <ul class="affirmations">${grounding.affirmations.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
-      <div class="faith-note">
-        <span aria-hidden="true">✦</span>
-        <p>Let faith ground you, preparation guide you, and honest words carry you.</p>
-      </div>
-      <div class="grounding-actions">
-        <button type="button" class="primary-button" data-start-study>I'm ready — begin with my introduction</button>
-        <button type="button" data-start-breathing>Guide me through the breaths</button>
-      </div>
-    </section>`;
-}
-
 function renderIntro() {
   const skills = profile.skillAreas.map(area => `
     <details class="question">
@@ -195,7 +173,6 @@ function renderIntro() {
     </details>`).join("");
 
   return `
-    ${renderGrounding()}
     ${renderOwnershipGuide()}
     <header class="chapter-heading">
       <p class="section-label">Chapter 01 · Your introduction</p>
@@ -499,8 +476,11 @@ document.addEventListener("change", event => {
 
 document.addEventListener("click", event => {
   if (event.target.closest("[data-start-study]")) {
-    document.querySelector("#intro-recall")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    document.querySelector("#intro-recall")?.focus({ preventScroll: true });
+    if (window.location.hash !== "#intro") window.location.hash = "intro";
+    window.setTimeout(() => {
+      document.querySelector("#intro-recall")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      document.querySelector("#intro-recall")?.focus({ preventScroll: true });
+    }, 0);
     return;
   }
   if (event.target.closest("[data-start-breathing]")) {
