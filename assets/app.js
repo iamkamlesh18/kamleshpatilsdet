@@ -142,8 +142,7 @@ const tabNames = [
   ["intro", "Intro"],
   ["projects", "Projects"],
   ["questions", "SDET & QA Q&A"],
-  ["grounding", "Grounding"],
-  ["meditation", "Breathing meditation · 3 deep breaths, then 1 minute"]
+  ["grounding", "Grounding"]
 ];
 let activeTopic = null;
 let mostAskedOnly = true;
@@ -552,21 +551,31 @@ function renderGrounding() {
       <p>See yourself explaining one real example from Union Bank, Elements, COOP and Smile Portal, or RSA Intact. You describe your own testing work, name the tools you used, and explain the result honestly. Notice the steadiness in your voice and the relief of being understood. You do not need to predict an outcome; you are practising the clear, capable actions you can take in this moment.</p>
       <p class="manifestation-close">Feel that confidence for a breath. When you are ready, open your eyes and carry that steadiness into your next practice answer.</p>
     </section>
-    <details class="meditation-panel">
-      <summary>Breathing meditation · 3 deep breaths, then 1 minute</summary>
+  `;
+}
+
+function renderMeditation() {
+  return `
+    <header class="chapter-heading">
+      <h2>Breathing meditation</h2>
+    </header>
+    <section class="meditation-panel meditation-page">
+      <p class="grounding-label">3 deep breaths, then 1 minute</p>
       <p>Take three comfortable deep breaths, releasing gently through your mouth and nose. Then breathe in for 4 seconds and out for 6 seconds for one minute. Keep the breath comfortable; pause if you feel unwell.</p>
       <button id="breath-toggle" type="button" aria-pressed="false">Start breathing guide</button>
       <section id="breathing" class="breathing" aria-live="polite" hidden>
         <div class="breathing-orb" aria-hidden="true"></div>
         <p id="breathing-instruction">Ready when you are.</p>
       </section>
-    </details>`;
+    </section>`;
 }
 
 function render() {
   stopBreathing();
   const requestedTab = window.location.hash.slice(1);
-  const activeTab = tabNames.some(([key]) => key === requestedTab) ? requestedTab : "intro";
+  const activeTab = requestedTab === "meditation" || tabNames.some(([key]) => key === requestedTab)
+    ? requestedTab
+    : "intro";
   activeTopic = null;
   mostAskedOnly = activeTab === "questions";
   tabs.innerHTML = tabNames.map(([key, label]) => `
@@ -576,17 +585,22 @@ function render() {
     ? renderProjects()
     : activeTab === "questions"
       ? renderQuestions()
-      : activeTab === "grounding" || activeTab === "meditation"
+      : activeTab === "grounding"
         ? renderGrounding()
-        : renderIntro();
+        : activeTab === "meditation"
+          ? renderMeditation()
+          : renderIntro();
 
-  if (activeTab === "meditation") content.querySelector(".meditation-panel").open = true;
   if (activeTab === "questions") renderQuestionList("");
 }
 
 tabs.addEventListener("click", event => {
   const button = event.target.closest("button[data-tab]");
   if (button) window.location.hash = button.dataset.tab;
+});
+
+document.querySelector("#meditation-link").addEventListener("click", () => {
+  window.location.hash = "meditation";
 });
 
 document.addEventListener("input", event => {

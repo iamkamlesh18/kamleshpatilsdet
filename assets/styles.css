@@ -386,10 +386,10 @@ pre {
 .grounding-list li { padding-left: 4px; }
 .grounding-list li::marker { color: var(--green); }
 .meditation-panel { border-left-color: var(--chakra-throat); }
-.meditation-panel > summary { cursor: pointer; font-weight: 700; }
-.meditation-panel[open] > summary { margin-bottom: 12px; color: var(--accent-deep); }
-.meditation-panel > p { max-width: 75ch; }
+.meditation-page > p { max-width: 75ch; }
 .meditation-panel .breathing { margin: 16px 0 0; }
+.toolbar #meditation-link { border-color: color-mix(in srgb, var(--chakra-throat) 40%, var(--line)); background: var(--green-wash); }
+.toolbar #meditation-link:hover { border-color: var(--chakra-throat); }
 .breathing { grid-column: auto; }
 
 .site-footer { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 20px; margin-top: 48px; padding: 22px 0 8px; border-top: 1px solid var(--line); color: var(--muted); font-size: .84rem; }

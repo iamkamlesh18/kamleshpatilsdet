@@ -20,7 +20,7 @@ Read this guide before editing interview material. It records where facts live, 
 - [`data/resources.js`](./data/resources.js) contains optional YouTube and Google Images searches for topics.
 - [`data/grounding.js`](./data/grounding.js) contains the honest ownership and systems-thinking prompts used in the Intro.
 
-The Grounding tab keeps affirmations, a present-tense manifestation exercise, faith, and breathing separate from interview study content. The top navigation includes a breathing shortcut beside Grounding; it opens the meditation panel directly. Returning to Grounding leaves the panel closed, and its timer stops if the user changes sections or closes the panel.
+The Grounding tab keeps affirmations, a present-tense manifestation exercise, and faith separate from breathing and interview study content. The header has a breathing meditation button beside Recall practice. It opens a dedicated meditation page; the timed guide stops if the user leaves that page.
 
 ## Editing interview answers
 
