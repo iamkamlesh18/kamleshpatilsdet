@@ -35,12 +35,39 @@ export const fundamentalsAndJava = [
       {
         question: "What are the four pillars of object-oriented programming?",
         answer: [
-          "**Encapsulation — `private`** keeps an object's data and the methods that manage it together. I mark internal fields `private` and expose only the operations other code needs, so callers cannot put the object into an invalid state.",
-          "**COOP / Smile example:** In my Copilot proof of concept, I evaluated generated page-object code. A page object applies encapsulation when it keeps page details behind clear methods instead of making every test manipulate those details directly; the generated code was reviewed as a proof of concept, not described as a production deployment.",
-          "**Inheritance — `extends`** lets a subclass reuse or specialize a parent class. I use it only for a genuine “is-a” relationship; when I only need shared automation behaviour, composition or a reusable component is often clearer. COOP / Smile used reusable test components, which is not by itself a claim that I built an inheritance hierarchy.",
-          "**Polymorphism — overloading and overriding** lets the same method name or contract behave in different ways. Overloading uses different parameter lists and is selected at compile time; overriding provides a compatible subclass implementation and is selected at runtime.",
-          "**Abstraction — interface or abstract class** shows callers what they can do while hiding implementation details. An interface describes a capability; an abstract class can also share state and implementation. In Selenium, `WebDriver driver = new ChromeDriver()` uses the `WebDriver` interface while selecting a concrete browser driver.",
-          "**How I use the ideas as an SDET:** I aim for test code that is readable, reusable, and easy to change. In COOP / Smile, my confirmed experience includes Java, Serenity BDD, Selenium, reusable components, and a reviewed page-object proof of concept; I describe those facts without claiming unverified implementation details."
+          {
+            heading: "Encapsulation",
+            points: [
+              { label: "Definition", text: "Keep an object's data and the methods that manage it together, and control how other code can access that state." },
+              { label: "Keyword and purpose", text: "Use `private` for internal fields, then expose only the operations callers need. This protects the object's valid state and hides implementation details." },
+              { label: "COOP / Smile example", text: "In my Copilot proof of concept, I reviewed generated page-object code to see whether page interactions were behind reusable methods. I evaluated this as a proof of concept; I do not present generated code as a production deployment.", type: "example" }
+            ]
+          },
+          {
+            heading: "Inheritance",
+            points: [
+              { label: "Definition", text: "A child class acquires and can specialize behaviour from a parent class." },
+              { label: "Keyword and purpose", text: "Java uses `extends`. Use inheritance for a true “is-a” relationship; choose composition when a class only needs to use a helper or shared component." },
+              { label: "COOP / Smile connection", text: "I used reusable test components in the project. Reuse by itself does not prove inheritance, so I would only describe an `extends` relationship if I had verified the actual class design.", type: "example" }
+            ]
+          },
+          {
+            heading: "Polymorphism",
+            points: [
+              { label: "Definition", text: "One method name or contract can produce different behaviour, depending on its parameters or the actual object." },
+              { label: "Overloading", text: "Use the same method name with different parameter lists. The compiler selects the matching method, so this is compile-time polymorphism." },
+              { label: "Overriding", text: "A subclass supplies a compatible implementation of an inherited instance method. The runtime object selects the implementation, so this is runtime polymorphism." },
+              { label: "Recall cue", text: "Overloading changes the inputs; overriding changes the inherited implementation." }
+            ]
+          },
+          {
+            heading: "Abstraction",
+            points: [
+              { label: "Definition", text: "Show the caller what an object can do while hiding the details of how it does it." },
+              { label: "Interface or abstract class", text: "An interface describes a capability that different classes can implement. An abstract class can also hold shared state, constructors, and implemented methods." },
+              { label: "Selenium example", text: "The illustrative declaration `WebDriver driver = new ChromeDriver()` uses the WebDriver contract with a concrete Chrome driver. Selenium is one of my project tools; this code illustrates the Java concept and is not quoted from project source.", type: "example" }
+            ]
+          }
         ]
       },
       {
@@ -62,10 +89,28 @@ export const fundamentalsAndJava = [
       {
         question: "Explain final, finally, and finalize.",
         answer: [
-          "**`final` — keyword:** A final variable can be assigned only once, a final method cannot be overridden, and a final class cannot be extended.",
-          "**`finally` — block:** Code in a `finally` block normally runs after `try` / `catch`, including when an exception is propagating. For resources that implement `AutoCloseable`, prefer try-with-resources because it handles closing reliably.",
-          "**`finalize()` — legacy method:** It was an old garbage-collection hook, is deprecated, and is not guaranteed to run at a predictable time—or at all. Never rely on it for browser, file, or other resource cleanup.",
-          "**COOP / Smile interview example:** For a Java + Selenium browser check, `final` can protect a value from reassignment; cleanup belongs in the test framework lifecycle or a reliable `finally` / try-with-resources pattern, not `finalize()`. Serenity may manage lifecycle hooks; describe the implementation you actually used. The code below is an illustrative Java pattern, not a project code excerpt."
+          {
+            heading: "final",
+            points: [
+              { label: "Definition", text: "The `final` keyword restricts reassignment or extension." },
+              { label: "Where it applies", text: "A final variable can be assigned only once, a final method cannot be overridden, and a final class cannot be extended." }
+            ]
+          },
+          {
+            heading: "finally",
+            points: [
+              { label: "Definition", text: "A `finally` block is used with `try` / `catch` for cleanup after the try operation, including when an exception is propagating." },
+              { label: "Resource handling", text: "For `AutoCloseable` resources, prefer try-with-resources because Java closes them reliably, including when an exception occurs." },
+              { label: "Illustrative example", text: "In an automation test, the browser session must be closed through the framework lifecycle or an appropriate cleanup pattern. The code below illustrates cleanup; it is not copied from my project.", type: "example" }
+            ]
+          },
+          {
+            heading: "finalize()",
+            points: [
+              { label: "Definition", text: "`finalize()` was a legacy garbage-collection hook." },
+              { label: "Important limitation", text: "It is deprecated and is not guaranteed to run at a predictable time—or at all. Never rely on it to close a browser, file, or other resource." }
+            ]
+          }
         ],
         code: `// Illustrative Java pattern; not copied from the project.
 static void runCheck(AutoCloseable browser, String workflow) throws Exception {

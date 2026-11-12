@@ -14,9 +14,22 @@ export const javaInterviewQuestions = [
       {
         question: "What is the difference between overloading and overriding?",
         answer: [
-          "**Overloading:** Same method name, different parameter list (number, types, or order). The compiler chooses the matching method from the arguments, so this is compile-time polymorphism.",
-          "**Overriding:** A subclass provides a compatible implementation of an inherited instance method. The actual object determines which implementation runs, so this is runtime polymorphism.",
-          "**COOP / Smile connection:** Both concepts can help explain Java automation design, but my project evidence is Java, Serenity BDD, Selenium, reusable components, and a reviewed page-object proof of concept. I do not claim a particular project class used inheritance unless I can verify that code."
+          {
+            heading: "Overloading",
+            points: [
+              { label: "Definition", text: "Define methods with the same name but different parameter lists; the number, types, or order of parameters must differ." },
+              { label: "When selected", text: "The compiler selects the matching method from the arguments, so overloading is compile-time polymorphism." },
+              { label: "Example", text: "The illustrative `login(String username)` and `login(String username, String otp)` methods have the same name but different parameters.", type: "example" }
+            ]
+          },
+          {
+            heading: "Overriding",
+            points: [
+              { label: "Definition", text: "A subclass supplies a compatible implementation of an inherited instance method." },
+              { label: "When selected", text: "The actual object's class determines which implementation runs, so overriding is runtime polymorphism." },
+              { label: "Project context", text: "My confirmed COOP / Smile experience includes Java, Serenity BDD, Selenium, reusable components, and a reviewed page-object proof of concept. I would only claim a specific overridden method if I had verified the project code.", type: "example" }
+            ]
+          }
         ],
         comparison: {
           headers: ["Compare", "Overloading", "Overriding"],

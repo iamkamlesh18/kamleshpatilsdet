@@ -33,6 +33,7 @@ The Grounding tab keeps affirmations, a present-tense manifestation exercise, an
 7. Preserve the user's supplied company questions. Do not remove material just to shorten the book; improve organization and wording instead.
 8. Keep answers accurate and sayable aloud. Use terms and examples that explain what a concept is for, when it applies, and important trade-offs. Use only confirmed project experience for first-person examples; label illustrative code as illustrative rather than implying it came from a project.
 9. Use only facts Kamlesh has supplied. Do not invent responsibilities, tools, certifications, team sizes, or results.
+10. For concept families that need their own titles (such as the four OOP pillars), use an array of `{ heading, points }` sections. Each point has readable `label` and `text` fields. The section heading is bold and sits outside the bullets; mark examples with `type: "example"` so they render as plain text in a separate callout without bold emphasis.
 
 ## Project facts and AI proof of concept
 

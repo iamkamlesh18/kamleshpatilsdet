@@ -95,7 +95,7 @@ function normalizeQuestion(question) {
 }
 
 function answerLength(answer) {
-  return (Array.isArray(answer) ? answer.join("\n") : answer).length;
+  return answerText(answer).length;
 }
 
 const questionGroupsByTopic = new Map();
@@ -199,14 +199,33 @@ function renderChips(items) {
   return `<ul class="chips">${items.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
 }
 
-function formatAnswerPoint(point) {
+function formatAnswerPoint(point, emphasize = true) {
   const escaped = escapeHtml(point.trim());
-  return escaped
-    .replace(/`([^`]+)`/gu, "<code>$1</code>")
-    .replace(/\*\*(.+?)\*\*/gu, "<strong>$1</strong>");
+  const formatted = escaped.replace(/`([^`]+)`/gu, "<code>$1</code>");
+  return emphasize ? formatted.replace(/\*\*(.+?)\*\*/gu, "<strong>$1</strong>") : formatted;
+}
+
+function answerText(answer) {
+  if (!Array.isArray(answer)) return answer;
+  return answer.map(item => typeof item === "string"
+    ? item
+    : `${item.heading} ${item.points.map(point => `${point.label || ""} ${point.text}`).join(" ")}`).join(" ");
 }
 
 function renderAnswerPoints(answer) {
+  if (Array.isArray(answer) && answer.every(item => typeof item !== "string")) {
+    return `<div class="answer-sections">${answer.map(section => `
+      <section class="answer-section">
+        <h4>${escapeHtml(section.heading)}</h4>
+        <ul class="answer-points">${section.points.map(point => `
+          <li${point.type === "example" ? ' class="answer-example"' : ""}>${point.label
+            ? `<span class="answer-point-label">${escapeHtml(point.label)}</span>`
+            : ""}${formatAnswerPoint(point.text, point.type !== "example")}</li>
+        `).join("")}</ul>
+      </section>
+    `).join("")}</div>`;
+  }
+
   const paragraphs = Array.isArray(answer) ? answer : answer.split(/\n\s*\n/u);
   const points = paragraphs.flatMap(paragraph => paragraph
     .replace(/\b(e\.g|i\.e)\./giu, "$1\uE000")
@@ -443,9 +462,9 @@ function renderQuestionList(searchText) {
       ...question,
       key: `${groupIndex}-${questionIndex}`
     })).filter(question =>
-      (activeTopic === null || question.topic === activeTopic) &&
-      (!mostAskedOnly || query || question.mostAsked) &&
-      `${question.question} ${question.answer}`.toLocaleLowerCase().includes(query)
+        (activeTopic === null || question.topic === activeTopic) &&
+        (!mostAskedOnly || query || question.mostAsked) &&
+        `${question.question} ${answerText(question.answer)}`.toLocaleLowerCase().includes(query)
     )
   })).filter(group => group.questions.length);
   const panel = document.querySelector("#question-panel");
@@ -557,12 +576,12 @@ function renderGrounding() {
 function renderMeditation() {
   return `
     <header class="chapter-heading">
-      <h2>Breathing meditation</h2>
+      <h2>Breathe</h2>
     </header>
     <section class="meditation-panel meditation-page">
-      <p class="grounding-label">3 deep breaths, then 1 minute</p>
+      <p class="grounding-label">3 deep breaths · 1 minute at 4 in / 6 out</p>
       <p>Take three comfortable deep breaths, releasing gently through your mouth and nose. Then breathe in for 4 seconds and out for 6 seconds for one minute. Keep the breath comfortable; pause if you feel unwell.</p>
-      <button id="breath-toggle" type="button" aria-pressed="false">Start breathing guide</button>
+      <button id="breath-toggle" type="button" aria-pressed="false">Start breathing</button>
       <section id="breathing" class="breathing" aria-live="polite" hidden>
         <div class="breathing-orb" aria-hidden="true"></div>
         <p id="breathing-instruction">Ready when you are.</p>
@@ -592,6 +611,7 @@ function render() {
           : renderIntro();
 
   if (activeTab === "questions") renderQuestionList("");
+  animatePageEntrance();
 }
 
 tabs.addEventListener("click", event => {
@@ -602,6 +622,14 @@ tabs.addEventListener("click", event => {
 document.querySelector("#meditation-link").addEventListener("click", () => {
   window.location.hash = "meditation";
 });
+
+function animatePageEntrance() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || typeof content.animate !== "function") return;
+  content.animate(
+    [{ opacity: 0, transform: "translateY(12px)" }, { opacity: 1, transform: "translateY(0)" }],
+    { duration: 320, easing: "cubic-bezier(.2,.7,.2,1)" }
+  );
+}
 
 document.addEventListener("input", event => {
   if (event.target.id === "question-search") {
@@ -683,7 +711,7 @@ function stopBreathing() {
   if (panel) panel.hidden = true;
   if (button) {
     button.setAttribute("aria-pressed", "false");
-    button.textContent = "Start breathing guide";
+    button.textContent = "Start breathing";
   }
 }
 
@@ -698,9 +726,10 @@ function toggleBreathing() {
 
   panel.hidden = false;
   button.setAttribute("aria-pressed", "true");
-  button.textContent = "Stop breathing guide";
+  button.textContent = "Stop breathing";
   const instruction = document.querySelector("#breathing-instruction");
   const orb = document.querySelector(".breathing-orb");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const steps = [];
   for (let breath = 1; breath <= 3; breath += 1) {
     steps.push([`Deep breath ${breath} of 3: inhale`, 4, true]);
@@ -721,7 +750,7 @@ function toggleBreathing() {
     const [text, duration, inhale] = steps[step];
     step += 1;
     instruction.textContent = text;
-    orb.style.transition = `transform ${duration}s ease-in-out`;
+    orb.style.transition = reduceMotion ? "none" : `transform ${duration}s ease-in-out`;
     orb.style.transform = inhale ? "scale(1)" : "scale(.6)";
     breathTimer = window.setTimeout(advance, duration * 1000);
   }
