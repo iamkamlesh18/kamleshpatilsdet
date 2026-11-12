@@ -8,6 +8,14 @@ export const profile = {
   experience: "5 years in quality engineering, software testing, automation testing, and mobile testing",
   nextRole: "A role with greater ownership of quality and automation",
   workPreferences: ["Remote", "Hybrid", "On-site"],
+  introRecall: [
+    { title: "Who I am", detail: "Software Engineer · QA Engineer · SDET" },
+    { title: "Experience", detail: "5 years in quality engineering, testing, automation, and mobile testing" },
+    { title: "Where I have worked", detail: "Enterprise banking and financial services; also insurance and fleet management" },
+    { title: "My toolkit", detail: "Java · Selenium · Serenity BDD · Cucumber · BrowserStack · API testing · Agile Scrum" },
+    { title: "My day-to-day", detail: "Test design · automation · regression · environment checks · defect management · production validation" },
+    { title: "How I keep growing", detail: "Azure · Salesforce · Agile · banking · Capgemini Ocean learning" }
+  ],
   intro: [
     "Hello, my name is Kamlesh Patil. I am a Software Engineer with 5 years of experience in Quality Engineering, software testing, automation testing, and mobile testing.",
     "Over the years, I have worked on enterprise-level projects across banking and financial services. I have also supported insurance and fleet-management work.",

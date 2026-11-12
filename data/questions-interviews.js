@@ -46,7 +46,7 @@ export const interviewQuestions = [
       },
       {
         question: "What is your notice period?",
-        answer: "My recorded notice period is 90 days. I would confirm my current contractual notice period and any applicable release options before giving this answer in an interview."
+        answer: "My recorded notice period is 90 days. Before confirming a joining date, I would verify the current contractual notice period and any release options.\n\nIf the role needs a specific timeline, I would discuss it transparently rather than promise an early release without confirmation."
       },
       {
         question: "What is one area you are working to improve?",

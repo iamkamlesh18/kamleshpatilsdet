@@ -4,6 +4,12 @@ export const projects = [
     name: "COOP — Retail COOP and Smile Portal",
     domain: "Retail banking · BFSI",
     featured: true,
+    recall: [
+      "Built and maintained UI and API automation for Retail COOP and Smile Portal.",
+      "Designed an end-to-end framework, reusable components, and CI/CD suites.",
+      "Worked on defect triage and SQL validation.",
+      "Result: 40% improvement in test-cycle efficiency."
+    ],
     spokenAnswer: [
       "I worked on the Retail COOP and Smile Portal account, where I built and maintained UI and API automation. I designed an end-to-end framework and added UI and API suites to the CI/CD process.",
       "I also created reusable test components and worked with the team on defect triage and SQL validation. Reusing the common components helped us improve test-cycle efficiency by 40%."
@@ -49,6 +55,11 @@ export const projects = [
     name: "Union Bank",
     domain: "Retail banking · Capital markets · BFSI",
     modules: ["Empower", "Digital Channels", "Commercial Card", "Unified Case Management"],
+    recall: [
+      "Created test cases and traceability from BRDs and mapping documents.",
+      "Automated loan, card, and digital-banking workflows.",
+      "Validated APIs and database records; supported UAT across Agile sprints."
+    ],
     spokenAnswer: [
       "I worked across four Union Bank modules: Empower, Digital Channels, Commercial Card, and Unified Case Management. I used BRDs and mapping documents to create test cases, scenarios, and requirements traceability.",
       "I automated loan, card, and digital-banking workflows, validated APIs and database records, and supported UAT sign-off across Agile sprints."
@@ -60,6 +71,11 @@ export const projects = [
     name: "Elements",
     domain: "Fleet management",
     workflows: ["Vehicle tracking", "Maintenance", "Asset management"],
+    recall: [
+      "Built configurable Rainbow test flows and data-driven regression packs.",
+      "Covered vehicle tracking, maintenance, and asset-management workflows.",
+      "Result: 60% reduction in manual testing effort."
+    ],
     spokenAnswer: [
       "On Elements, I tested vehicle tracking, maintenance, and asset-management workflows. I built configurable test flows with the Rainbow framework and validated the end-to-end workflows.",
       "I also created data-driven regression packs. This reduced manual testing effort by 60%, and I was recognized for framework ownership and defect-free UAT delivery."
@@ -70,6 +86,11 @@ export const projects = [
   {
     name: "RSA Intact",
     domain: "Insurance · Financial services",
+    recall: [
+      "Clarified requirements and designed tests from acceptance criteria.",
+      "Performed functional and regression testing; documented and retested defects.",
+      "Automated repeatable checks and collaborated through release."
+    ],
     spokenAnswer: [
       "For RSA Intact, I tested insurance features with a requirements-first approach. I clarified requirements with the team, then designed scenarios and test cases from requirements and acceptance criteria.",
       "I performed functional and regression testing, documented and retested defects, and created automation for repeatable checks. I collaborated with developers and business teammates throughout the Agile development and release cycle."

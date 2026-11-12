@@ -14,6 +14,8 @@ This is the human and AI reference for keeping the interview-prep site accurate.
 - [`data/questions-api-sql.js`](./data/questions-api-sql.js) contains API testing and SQL.
 - [`data/questions-delivery.js`](./data/questions-delivery.js) contains TestNG, CI/CD, Git, Jira, and Agile.
 - [`data/questions-interviews.js`](./data/questions-interviews.js) contains common company interview and behavioural questions.
+- [`data/resources.js`](./data/resources.js) contains YouTube and Google Images search links for each learning chapter.
+- [`data/grounding.js`](./data/grounding.js) contains the pre-study intention, faith-based affirmations, visualization steps, and honest ownership/systems-thinking prompts.
 - [`README.md`](./README.md) explains the project and deployment.
 
 The original interview-prep notes supplied with the project are kept separately as a reference. The Pages workflow does not publish those source notes, this guide, or other repository-only files.
@@ -21,14 +23,17 @@ The original interview-prep notes supplied with the project are kept separately 
 ## Writing or updating content
 
 1. Keep the candidate's voice natural, first-person, and easy to say aloud. Write complete answers rather than fragments.
-2. Keep the key point first, then add a short explanation or example. A good answer should be clear without sounding memorized.
-3. Use only facts Kamlesh has supplied. Do not invent employers, responsibilities, tools, certifications, team sizes, or results.
-4. Preserve verified project results: COOP improved test-cycle efficiency by 40%; Elements reduced manual effort by 60%. Do not change the meaning of either figure.
-5. Keep each project's spoken answer, tools, and result separate. COOP has extra framework, CI/CD, reuse, data-validation, and troubleshooting depth.
-6. Put each question under its existing topic. Each question file exports an array of topic objects; every topic has a name and a list of `{ question, answer }` records. The answer is a complete response; separate paragraphs with `\n\n`.
-7. Leave the short comments at the top of data files in place. They explain the file's purpose to future editors and AI tools.
-8. If an answer depends on current personal details, such as notice period or years of experience, confirm it with Kamlesh before changing it.
-9. Keep imports in `assets/app.js` in sync when adding a new data file, and keep the GitHub Pages upload paths in `.github/workflows/pages.yml` in sync if adding site assets.
+2. Keep every question answer point-first. The page shows concise recall bullets first and places the full spoken explanation inside a separate expandable subsection.
+3. Keep the key idea first, then add an example, practical use, or caveat. Use paragraph breaks (`\n\n`) to make those parts easier to scan.
+4. Use only facts Kamlesh has supplied. Do not invent employers, responsibilities, tools, certifications, team sizes, or results.
+5. Preserve verified project results: COOP improved test-cycle efficiency by 40%; Elements reduced manual effort by 60%. Do not change the meaning of either figure.
+6. Keep each project's recall points, spoken answer, tools, and result separate. COOP has extra framework, CI/CD, reuse, data-validation, and troubleshooting depth.
+7. Put each question under its existing topic. Each question file exports an array of topic objects; every topic has a name and a list of `{ question, answer }` records. Optional `recall` arrays can override the automatic first-sentence recall cues.
+8. Add or update topic learning searches in `data/resources.js`. These open Google Images or YouTube search results, not embedded third-party media; the book's diagrams are original inline SVG.
+9. Leave the short comments at the top of data files in place. They explain the file's purpose to future editors and AI tools.
+10. If an answer depends on current personal details, such as notice period or years of experience, confirm it with Kamlesh before changing it.
+11. Keep imports in `assets/app.js` in sync when adding a new data file, and keep the GitHub Pages upload paths in `.github/workflows/pages.yml` in sync if adding site assets.
+12. Keep confidence guidance encouraging and grounded: affirm preparation and honest communication, not guaranteed interview outcomes. Make it clear that leadership-style system thinking does not mean claiming work or authority the candidate did not have.
 
 ## Preview and publish
 

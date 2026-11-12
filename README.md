@@ -1,6 +1,6 @@
 # Kamlesh Patil — Interview Prep
 
-A lightweight, static interview-preparation site for GitHub Pages. The site has no build step or runtime dependencies. Start with the [content guide](./CONTENT_GUIDE.md) before changing personal facts or interview answers.
+A static, book-style interview-preparation site for GitHub Pages. The site has no build step or runtime dependencies. It starts with a grounded confidence ritual, puts short recall cues before full spoken answers, separates material into chapters, and uses original SVG diagrams plus optional YouTube and Google Images searches. Start with the [content guide](./CONTENT_GUIDE.md) before changing personal facts or interview answers.
 
 ## Update your prep content
 
