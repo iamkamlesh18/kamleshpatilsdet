@@ -8,8 +8,78 @@ export const learningResources = {
   },
   Java: {
     description: "Core Java, collections, and object-oriented design",
-    youtube: "Java interview questions OOP collections exceptions explained",
-    images: "Java OOP four pillars class interface diagram"
+    youtube: "Java OOP explained visually animations collections interview",
+    images: "Java OOP four pillars inheritance tree doodle class interface diagram"
+  },
+  "Java — interview essentials": {
+    description: "Overloading, overriding, equality, constructors, and core Java",
+    youtube: "Java overloading overriding equals hashCode explained animation",
+    images: "Java polymorphism overloading overriding tree diagram doodle"
+  },
+  "Java coding practice": {
+    description: "Common coding questions with a recall plan and Java solution",
+    youtube: "Java coding interview questions visualized doodle arrays strings",
+    images: "Java algorithms array string interview doodle flowchart"
+  },
+  "Automation and framework — company questions": {
+    description: "Framework design, data, reporting, TestNG, and tools",
+    youtube: "TestNG Serenity framework automation testing explained visual",
+    images: "automation testing framework architecture diagram doodle"
+  },
+  "Editor and chat application automation": {
+    description: "Test strategy for text editors, rich text, and chat",
+    youtube: "rich text editor testing automation chat editor test scenarios",
+    images: "rich text editor testing scenarios diagram"
+  },
+  "Manual testing — company questions": {
+    description: "Test process, smoke checks, and test types",
+    youtube: "manual software testing explained visually smoke sanity testing",
+    images: "manual software testing process flow diagram"
+  },
+  "Defect management — company questions": {
+    description: "Defect workflow and severity versus priority",
+    youtube: "software defect life cycle severity priority explained visual",
+    images: "defect lifecycle severity priority diagram"
+  },
+  "Agile and testing methodologies — company questions": {
+    description: "Sprint collaboration and QA responsibilities",
+    youtube: "QA role Agile Scrum sprint testing explained visual",
+    images: "Agile sprint QA testing workflow diagram"
+  },
+  "Payments and financial domain — company questions": {
+    description: "A high-level view of bank transfers and payment flows",
+    youtube: "how interbank payments work clearing settlement explained animation",
+    images: "interbank payment flow clearing settlement diagram"
+  },
+  "General and behavioral — company questions": {
+    description: "Team strengths and useful project-recall techniques",
+    youtube: "active recall spaced practice memory learning explained visual",
+    images: "active recall memory map study diagram"
+  },
+  "Other technical topics — company questions": {
+    description: "Domain concepts such as interactive voice response",
+    youtube: "IVR interactive voice response explained animation",
+    images: "IVR call flow diagram"
+  },
+  "Selenium interview questions": {
+    description: "Common Selenium WebDriver interview follow-ups",
+    youtube: "Selenium WebDriver interview questions visualized waits locators",
+    images: "Selenium WebDriver locator wait window diagram doodle"
+  },
+  "TestNG interview questions": {
+    description: "TestNG lifecycle, data providers, groups, and execution",
+    youtube: "TestNG annotations DataProvider groups explained visually",
+    images: "TestNG annotations lifecycle tree diagram"
+  },
+  "Framework, build, and reporting questions": {
+    description: "Maven, CI, environments, data, and reporting",
+    youtube: "Maven Jenkins test automation framework explained visual",
+    images: "Maven CI test reporting pipeline diagram"
+  },
+  "BDD interview questions": {
+    description: "Cucumber, Gherkin, and readable behaviour examples",
+    youtube: "Cucumber BDD Gherkin explained visually Given When Then",
+    images: "Gherkin Given When Then flow diagram"
   },
   "Selenium WebDriver": {
     description: "Locators, waits, page objects, and browser interactions",

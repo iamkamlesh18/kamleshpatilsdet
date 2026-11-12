@@ -6,23 +6,32 @@ import { uiAndBdd } from "../data/questions-ui-bdd.js";
 import { apiAndSql } from "../data/questions-api-sql.js";
 import { deliveryQuestions } from "../data/questions-delivery.js";
 import { interviewQuestions } from "../data/questions-interviews.js";
+import { companyQuestions } from "../data/questions-company.js";
+import { javaInterviewQuestions } from "../data/questions-java.js";
+import { codingQuestions } from "../data/questions-coding.js";
 import { learningResources } from "../data/resources.js";
 import { grounding } from "../data/grounding.js";
 
-const questionGroups = [
+const allQuestionGroups = [
   ...fundamentalsAndJava,
+  ...javaInterviewQuestions,
   ...uiAndBdd,
   ...apiAndSql,
   ...deliveryQuestions,
-  ...interviewQuestions
+  ...interviewQuestions,
+  ...companyQuestions
 ];
+const javaQuestionGroups = allQuestionGroups.filter(group => group.topic === "Java" || group.topic.startsWith("Java —"));
+const questionGroups = allQuestionGroups.filter(group => !javaQuestionGroups.includes(group));
 const content = document.querySelector("#content");
 const tabs = document.querySelector("#tabs");
 const masteredKey = "kamlesh-interview-prep-mastered-v3";
 const tabNames = [
   ["intro", "Intro"],
   ["projects", "Projects"],
-  ["questions", "SDET Q&A"]
+  ["questions", "Topics"],
+  ["java", "Java"],
+  ["coding", "Coding"]
 ];
 let activeTopic = null;
 let mastered = loadMastered();
@@ -282,7 +291,7 @@ function renderProjects() {
 }
 
 function countQuestions() {
-  return questionGroups.reduce((total, group) => total + group.questions.length, 0);
+  return allQuestionGroups.reduce((total, group) => total + group.questions.length, 0);
 }
 
 function firstSentence(paragraph) {
@@ -330,9 +339,24 @@ function renderQuestion(question) {
             <summary>Read the full spoken answer</summary>
             <div class="spoken-answer answer-content">${renderParagraphs(question.answer.split(/\n\s*\n/u))}</div>
           </details>
+          ${question.code ? `
+            <details class="code-fold">
+              <summary>Show Java solution</summary>
+              <pre><code>${escapeHtml(question.code)}</code></pre>
+            </details>` : ""}
         </div>
       </details>
     </article>`;
+}
+
+function renderTopicBar(groups, label) {
+  return `
+    <nav class="topic-nav" aria-label="${escapeHtml(label)} topic shortcuts">
+      <button type="button" class="topic-chip" data-topic-all aria-pressed="${activeTopic === null}">All ${escapeHtml(label)}</button>
+      ${groups.map(group => `
+        <button type="button" class="topic-chip" data-topic="${escapeHtml(group.topic)}" aria-pressed="${activeTopic === group.topic}">${escapeHtml(group.topic)}</button>
+      `).join("")}
+    </nav>`;
 }
 
 function renderChapterIndex() {
@@ -365,6 +389,7 @@ function renderChapterIndex() {
             <small>${group.questions.length} questions · Open chapter →</small>
           </button>`).join("")}
       </div>
+      <p class="chapter-separation">Java theory and coding practice have their own tabs above.</p>
     </section>
     <section class="book-card study-method">
       <h3 class="subheading">A simple way to study</h3>
@@ -378,15 +403,16 @@ function renderChapterIndex() {
     </section>`;
 }
 
-function renderQuestionList(searchText) {
+function renderQuestionList(searchText, groups = questionGroups, showIndex = true) {
   const query = searchText.trim().toLocaleLowerCase();
-  const questions = questionGroups.flatMap((group, groupIndex) =>
-    group.questions.map((question, questionIndex) => ({
+  const questions = groups.flatMap(group => {
+    const globalGroupIndex = allQuestionGroups.indexOf(group);
+    return group.questions.map((question, questionIndex) => ({
       ...question,
       topic: group.topic,
-      key: `${groupIndex}-${questionIndex}`
-    }))
-  ).filter(question =>
+      key: `${globalGroupIndex}-${questionIndex}`
+    }));
+  }).filter(question =>
     (activeTopic === null || question.topic === activeTopic) &&
     `${question.question} ${question.answer}`.toLocaleLowerCase().includes(query)
   );
@@ -394,15 +420,16 @@ function renderQuestionList(searchText) {
   const progress = document.querySelector("#question-progress");
   if (!panel || !progress) return;
 
-  if (activeTopic === null && !query) {
+  if (showIndex && activeTopic === null && !query) {
     panel.innerHTML = renderChapterIndex();
   } else {
     const heading = query && activeTopic === null
       ? `<h2>Search results</h2><p class="muted">Matching questions from every chapter.</p>`
-      : `<h2>${escapeHtml(activeTopic)}</h2><p class="muted">Read the question, recall the points, then expand the spoken answer.</p>${renderLearningLinks(activeTopic)}`;
+      : activeTopic === null
+        ? `<h2>Java interview questions</h2><p class="muted">Core concepts and commonly asked Java follow-ups. Choose a Java subtopic above or review them all.</p>`
+        : `<h2>${escapeHtml(activeTopic)}</h2><p class="muted">Read the question, recall the points, then expand the spoken answer.</p>${renderLearningLinks(activeTopic)}`;
     panel.innerHTML = `
       <section class="chapter-view">
-        <button class="back-button" type="button" data-return-to-chapters>← All chapters</button>
         <header class="chapter-heading">${heading}</header>
         ${questions.length
           ? questions.map(renderQuestion).join("")
@@ -413,10 +440,20 @@ function renderQuestionList(searchText) {
   updateProgress();
 }
 
+function updateTopicButtons() {
+  document.querySelectorAll(".topic-nav button").forEach(button => {
+    button.setAttribute("aria-pressed", String(
+      button.hasAttribute("data-topic-all")
+        ? activeTopic === null
+        : button.dataset.topic === activeTopic
+    ));
+  });
+}
+
 function updateProgress() {
   const progress = document.querySelector("#question-progress");
   if (!progress) return;
-  const masteredCount = questionGroups.reduce((total, group, groupIndex) =>
+  const masteredCount = allQuestionGroups.reduce((total, group, groupIndex) =>
     total + group.questions.reduce((count, _, questionIndex) =>
       count + (mastered[`${groupIndex}-${questionIndex}`] ? 1 : 0), 0), 0);
   progress.innerHTML = `
@@ -434,14 +471,84 @@ function renderQuestions() {
     <section class="book-card study-controls">
       <label class="sr-only" for="question-search">Search questions and answers</label>
       <input id="question-search" class="search" type="search" placeholder="Search all questions and answers">
+      ${renderTopicBar(questionGroups, "topics")}
       <p id="question-progress" class="progress" aria-live="polite"></p>
     </section>
     <div id="question-panel"></div>`;
 }
 
+function renderJavaTree() {
+  return `<figure class="java-tree">
+    <svg viewBox="0 0 760 250" role="img" aria-labelledby="java-tree-title java-tree-desc">
+      <title id="java-tree-title">Java object-oriented programming concept tree</title>
+      <desc id="java-tree-desc">OOP branches into encapsulation, inheritance, polymorphism, and abstraction. Polymorphism branches into overloading and overriding.</desc>
+      <path class="tree-line" d="M380 56v32M380 88H105v36M380 88H285v36M380 88H475v36M380 88H655v36M475 168v26h-90M475 194h102"/>
+      <rect class="tree-root" x="290" y="12" width="180" height="44" rx="8"/><text x="380" y="39" text-anchor="middle">OBJECT-ORIENTED JAVA</text>
+      <rect class="tree-branch" x="24" y="124" width="162" height="52" rx="8"/><text x="105" y="146" text-anchor="middle">Encapsulation</text><text class="tree-note" x="105" y="163" text-anchor="middle">protect state</text>
+      <rect class="tree-branch" x="204" y="124" width="162" height="52" rx="8"/><text x="285" y="146" text-anchor="middle">Inheritance</text><text class="tree-note" x="285" y="163" text-anchor="middle">reuse / specialize</text>
+      <rect class="tree-branch" x="394" y="124" width="162" height="44" rx="8"/><text x="475" y="151" text-anchor="middle">Polymorphism</text>
+      <rect class="tree-branch" x="574" y="124" width="162" height="52" rx="8"/><text x="655" y="146" text-anchor="middle">Abstraction</text><text class="tree-note" x="655" y="163" text-anchor="middle">hide details</text>
+      <rect class="tree-leaf" x="308" y="194" width="154" height="42" rx="8"/><text x="385" y="220" text-anchor="middle">Overloading</text>
+      <rect class="tree-leaf" x="500" y="194" width="154" height="42" rx="8"/><text x="577" y="220" text-anchor="middle">Overriding</text>
+    </svg>
+    <figcaption>One tree to recall the four pillars—and the two forms of polymorphism.</figcaption>
+  </figure>`;
+}
+
+function renderJava() {
+  return `
+    <header class="chapter-heading">
+      <p class="section-label">Java · dedicated interview section</p>
+      <h2>Learn the idea. Explain it. Connect it to code.</h2>
+      <p>All Java questions are here, separate from general SDET topics and coding exercises.</p>
+    </header>
+    <section class="book-card">
+      <h3 class="subheading">OOP concept tree</h3>
+      ${renderJavaTree()}
+    </section>
+    <section class="book-card study-controls">
+      <label class="sr-only" for="java-search">Search Java questions</label>
+      <input id="java-search" class="search" type="search" placeholder="Search Java questions">
+      ${renderTopicBar(javaQuestionGroups, "Java")}
+      ${renderLearningLinks("Java")}
+      <p id="question-progress" class="progress" aria-live="polite"></p>
+    </section>
+    <div id="question-panel"></div>`;
+}
+
+function renderCoding() {
+  return `
+    <header class="chapter-heading">
+      <p class="section-label">Java · coding practice</p>
+      <h2>Common coding questions, all in one place.</h2>
+      <p>Start with the numbered approach. Think through edge cases, then expand the Java solution. Practise writing it yourself instead of memorizing it.</p>
+    </header>
+    <section class="book-card study-controls">
+      <label class="sr-only" for="coding-search">Search coding questions</label>
+      <input id="coding-search" class="search" type="search" placeholder="Search coding questions">
+      <p class="muted">${codingQuestions.length} common Java exercises · each has a recall plan and expandable solution</p>
+      ${renderLearningLinks("Java coding practice")}
+    </section>
+    <section class="coding-grid" aria-label="Common Java coding interview questions">
+      ${codingQuestions.map((question, index) => `
+        <article class="coding-card">
+          <div class="coding-card-top"><span>${String(index + 1).padStart(2, "0")}</span><span>Java · interview exercise</span></div>
+          <h3>${escapeHtml(question.question)}</h3>
+          <h4>Recall the approach</h4>
+          ${renderRecallList(question.recall)}
+          <details class="answer-fold">
+            <summary>Understand the approach and see code</summary>
+            <div class="spoken-answer">${renderParagraphs(question.answer.split(/\n\s*\n/u))}</div>
+            <pre><code>${escapeHtml(question.code)}</code></pre>
+          </details>
+        </article>`).join("")}
+    </section>`;
+}
+
 function render() {
   const requestedTab = window.location.hash.slice(1);
   const activeTab = tabNames.some(([key]) => key === requestedTab) ? requestedTab : "intro";
+  activeTopic = null;
   tabs.innerHTML = tabNames.map(([key, label]) => `
     <button type="button" data-tab="${key}"${activeTab === key ? ' aria-current="page"' : ""}>${label}</button>
   `).join("");
@@ -449,9 +556,14 @@ function render() {
     ? renderProjects()
     : activeTab === "questions"
       ? renderQuestions()
-      : renderIntro();
+      : activeTab === "java"
+        ? renderJava()
+        : activeTab === "coding"
+          ? renderCoding()
+          : renderIntro();
 
   if (activeTab === "questions") renderQuestionList("");
+  if (activeTab === "java") renderQuestionList("", javaQuestionGroups, false);
 }
 
 tabs.addEventListener("click", event => {
@@ -460,9 +572,17 @@ tabs.addEventListener("click", event => {
 });
 
 document.addEventListener("input", event => {
-  if (event.target.id === "question-search") {
+  if (event.target.id === "question-search" || event.target.id === "java-search") {
     activeTopic = null;
-    renderQuestionList(event.target.value);
+    updateTopicButtons();
+    const groups = event.target.id === "java-search" ? javaQuestionGroups : questionGroups;
+    renderQuestionList(event.target.value, groups, event.target.id !== "java-search");
+  }
+  if (event.target.id === "coding-search") {
+    const query = event.target.value.toLocaleLowerCase();
+    document.querySelectorAll(".coding-card").forEach(card => {
+      card.hidden = !card.textContent.toLocaleLowerCase().includes(query);
+    });
   }
 });
 
@@ -490,9 +610,18 @@ document.addEventListener("click", event => {
   const topicButton = event.target.closest("[data-topic]");
   if (topicButton) {
     activeTopic = topicButton.dataset.topic;
-    const search = document.querySelector("#question-search");
+    updateTopicButtons();
+    const search = document.querySelector("#question-search, #java-search");
     if (search) search.value = "";
-    renderQuestionList(document.querySelector("#question-search")?.value || "");
+    const groups = window.location.hash === "#java" ? javaQuestionGroups : questionGroups;
+    renderQuestionList("", groups, window.location.hash !== "#java");
+    return;
+  }
+  if (event.target.closest("[data-topic-all]")) {
+    activeTopic = null;
+    updateTopicButtons();
+    const groups = window.location.hash === "#java" ? javaQuestionGroups : questionGroups;
+    renderQuestionList("", groups, window.location.hash !== "#java");
     return;
   }
   if (event.target.closest("[data-return-to-chapters]")) {

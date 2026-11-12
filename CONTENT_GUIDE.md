@@ -14,8 +14,11 @@ This is the human and AI reference for keeping the interview-prep site accurate.
 - [`data/questions-api-sql.js`](./data/questions-api-sql.js) contains API testing and SQL.
 - [`data/questions-delivery.js`](./data/questions-delivery.js) contains TestNG, CI/CD, Git, Jira, and Agile.
 - [`data/questions-interviews.js`](./data/questions-interviews.js) contains common company interview and behavioural questions.
+- [`data/questions-company.js`](./data/questions-company.js) preserves the supplied Prama India, Infosys, Emerson, Selenium, TestNG, framework, BDD, domain, and behavioral question sets.
+- [`data/questions-java.js`](./data/questions-java.js) holds Java interview essentials shown in the dedicated Java tab.
+- [`data/questions-coding.js`](./data/questions-coding.js) holds the Java coding exercises and their recall plans and example solutions.
 - [`data/resources.js`](./data/resources.js) contains YouTube and Google Images search links for each learning chapter.
-- The always-visible manifestation and affirmation ritual is plain HTML in [`index.html`](./index.html), so it remains visible even before JavaScript loads.
+- The grounding ritual and full affirmations are in a collapsed-by-default section in [`index.html`](./index.html); a short blessing remains visible in the header.
 - [`data/grounding.js`](./data/grounding.js) contains honest ownership and systems-thinking prompts for the speaking guide.
 - [`README.md`](./README.md) explains the project and deployment.
 
@@ -34,7 +37,8 @@ The original interview-prep notes supplied with the project are kept separately 
 9. Leave the short comments at the top of data files in place. They explain the file's purpose to future editors and AI tools.
 10. If an answer depends on current personal details, such as notice period or years of experience, confirm it with Kamlesh before changing it.
 11. Keep imports in `assets/app.js` in sync when adding a new data file, and keep the GitHub Pages upload paths in `.github/workflows/pages.yml` in sync if adding site assets.
-12. Keep the static opening ritual in `index.html` visible without JavaScript. Keep confidence guidance encouraging and grounded: affirm preparation and honest communication, not guaranteed interview outcomes. Make it clear that leadership-style system thinking does not mean claiming work or authority the candidate did not have.
+12. Keep the static opening ritual in `index.html` available without JavaScript but collapsed by default. Keep confidence guidance encouraging and grounded: affirm preparation and honest communication, not guaranteed interview outcomes. Make it clear that leadership-style system thinking does not mean claiming work or authority the candidate did not have.
+13. Keep Java and coding as separate top-level routes. Keep all general topic shortcuts visible in the Q&A topic bar while a topic is open; do not make users return to the chapter index just to change subjects.
 
 ## Preview and publish
 
